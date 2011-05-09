@@ -20,7 +20,7 @@
  * THE SOFTWARE.
  */
 
-package uk.org.onegch.netkernel.liquibase;
+package org.netkernelroc.mod.liquibase;
 
 import java.sql.Connection;
 import java.sql.Driver;

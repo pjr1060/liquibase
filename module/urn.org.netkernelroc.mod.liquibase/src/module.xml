@@ -23,11 +23,11 @@
 <module version="2.0">
   <meta>
     <identity>
-      <uri>urn:uk:org:onegch:netkernel:liquibase</uri>
+      <uri>urn:org:netkernelroc:mod:liquibase</uri>
       <version>1.0.0</version>
     </identity>
     <info>
-      <name>1gch / liquibase</name>
+      <name>NetKernelROC / liquibase</name>
       <description>Database management through liquibase</description>
     </info>
   </meta>
@@ -36,10 +36,10 @@
     <dynamic/>
   </system>
   
-  <rootspace name="1gch / liquibase" uri="urn:uk:org:onegch:netkernel:liquibase" public="true">
+  <rootspace name="NetKernelROC / liquibase" uri="urn:org:netkernelroc:mod:liquibase" public="true">
     <accessor>
       <id>liquibase.update</id>
-      <class>uk.org.onegch.netkernel.liquibase.UpdateAccessor</class>
+      <class>org.netkernelroc.mod.liquibase.UpdateAccessor</class>
       <grammar>
         <active>
           <identifier>active:liquibase-update</identifier>
@@ -51,7 +51,7 @@
     </accessor>
     <accessor>
       <id>liquibase.update-available</id>
-      <class>uk.org.onegch.netkernel.liquibase.UpdateAvailableAccessor</class>
+      <class>org.netkernelroc.mod.liquibase.UpdateAvailableAccessor</class>
       <grammar>
         <active>
           <identifier>active:liquibase-update-available</identifier>
@@ -63,7 +63,7 @@
     </accessor>
     <accessor>
       <id>liquibase.clear-checksums</id>
-      <class>uk.org.onegch.netkernel.liquibase.ClearChecksumsAccessor</class>
+      <class>org.netkernelroc.mod.liquibase.ClearChecksumsAccessor</class>
       <grammar>
         <active>
           <identifier>active:liquibase-clear-checksums</identifier>

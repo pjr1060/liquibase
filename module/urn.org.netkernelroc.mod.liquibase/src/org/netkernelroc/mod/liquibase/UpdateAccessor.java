@@ -20,17 +20,14 @@
  * THE SOFTWARE.
  */
 
-package uk.org.onegch.netkernel.liquibase;
-
-import java.util.List;
+package org.netkernelroc.mod.liquibase;
 
 import liquibase.Liquibase;
-import liquibase.changelog.ChangeSet;
 
 import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.representation.IHDSNode;
 
-public class UpdateAvailableAccessor extends AbstractLiquibaseAccessor {
+public class UpdateAccessor extends AbstractLiquibaseAccessor {
   
   @Override
   public void onSource(INKFRequestContext aContext) throws Exception {
@@ -49,8 +46,8 @@ public class UpdateAvailableAccessor extends AbstractLiquibaseAccessor {
       liquibaseContext= aContext.source("arg:context", String.class);
     }
     
-    List<ChangeSet> changesets= liquibase.listUnrunChangeSets(liquibaseContext);
+    liquibase.update(liquibaseContext);
     
-    aContext.createResponseFrom(changesets.size() > 0);
+    aContext.createResponseFrom(true);
   }
 }

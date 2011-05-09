@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/module/urn.uk.org.onegch.netkernel.liquibase/Urn.uk.org.onegch.netkernel.liquibase.iml" filepath="$PROJECT_DIR$/module/urn.uk.org.onegch.netkernel.liquibase/Urn.uk.org.onegch.netkernel.liquibase.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module/urn.uk.org.onegch.netkernel.liquibase/urn.org.netkernelroc.mod.liquibase.iml" filepath="$PROJECT_DIR$/module/urn.uk.org.onegch.netkernel.liquibase/urn.org.netkernelroc.mod.liquibase.iml" />
     </modules>
   </component>
 </project>

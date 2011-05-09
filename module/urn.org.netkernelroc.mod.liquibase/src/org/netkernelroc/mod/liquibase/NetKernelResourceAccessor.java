@@ -20,34 +20,49 @@
  * THE SOFTWARE.
  */
 
-package uk.org.onegch.netkernel.liquibase;
+package org.netkernelroc.mod.liquibase;
 
-import liquibase.Liquibase;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Enumeration;
+
+import liquibase.resource.ClassLoaderResourceAccessor;
 
 import org.netkernel.layer0.nkf.INKFRequestContext;
-import org.netkernel.layer0.representation.IHDSNode;
+import org.netkernel.layer0.nkf.NKFException;
+import org.netkernel.layer0.representation.IReadableBinaryStreamRepresentation;
 
-public class UpdateAccessor extends AbstractLiquibaseAccessor {
+public class NetKernelResourceAccessor extends ClassLoaderResourceAccessor {
+  private INKFRequestContext context;
+  
+  public NetKernelResourceAccessor(INKFRequestContext aContext, ClassLoader cl) {
+    super(cl);
+    this.context= aContext;
+  }
   
   @Override
-  public void onSource(INKFRequestContext aContext) throws Exception {
-    Liquibase liquibase= createLiquibase(aContext, aContext.source("arg:changelog", String.class));
-    
-    if (aContext.exists("arg:parameters")) {
-      IHDSNode parameters= aContext.source("arg:parameters", IHDSNode.class);
-      for (IHDSNode parameter : parameters.getNodes("//parameter")) {
-        liquibase.setChangeLogParameter((String)parameter.getFirstValue("name"),
-                                        (String)parameter.getFirstValue("value"));
+  public InputStream getResourceAsStream(String arg0) throws IOException {
+    InputStream is= super.getResourceAsStream(arg0);
+    try {
+      if (is == null && context.exists(arg0)) {
+        is= context.source(arg0, IReadableBinaryStreamRepresentation.class).getInputStream();
       }
+    } catch (NKFException e) {
+      throw new IOException(e);
     }
+    return is;
+  }
+  
+  @Override
+  public Enumeration<URL> getResources(String arg0) throws IOException {
+    Enumeration<URL> resources= super.getResources(arg0);
     
-    String liquibaseContext= null;
-    if (aContext.exists("arg:context")) {
-      liquibaseContext= aContext.source("arg:context", String.class);
-    }
-    
-    liquibase.update(liquibaseContext);
-    
-    aContext.createResponseFrom(true);
+    return resources;
+  }
+  
+  @Override
+  public ClassLoader toClassLoader() {
+    return super.toClassLoader();
   }
 }

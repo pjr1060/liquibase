@@ -77,7 +77,7 @@
   </target>
   
   <target name="liquibase.init" depends="init">
-    <mkdir dir="module/urn.uk.org.onegch.netkernel.liquibase/build"/>
+    <mkdir dir="module/urn.org.netkernelroc.mod.liquibase/build"/>
   </target>
 
   <target name="liquibase.build" depends="liquibase.init">
@@ -87,23 +87,23 @@
         <include name="netkernel/modules/*.jar"/>
         <include name="*.jar"/>
       </fileset>
-      <fileset dir="module/urn.uk.org.onegch.netkernel.liquibase/src/lib/"/>
+      <fileset dir="module/urn.org.netkernelroc.mod.liquibase/src/lib/"/>
     </path>
 
     <javac classpathref="build.path"
-           srcdir="module/urn.uk.org.onegch.netkernel.liquibase/src/"
+           srcdir="module/urn.org.netkernelroc.mod.liquibase/src/"
            includes="**/*.java"
-           destdir="module/urn.uk.org.onegch.netkernel.liquibase/build"
+           destdir="module/urn.org.netkernelroc.mod.liquibase/build"
            debug="true"
            target="1.5"/>
 
-    <copy todir="module/urn.uk.org.onegch.netkernel.liquibase/build">
-      <fileset dir="module/urn.uk.org.onegch.netkernel.liquibase/src"/>
+    <copy todir="module/urn.org.netkernelroc.mod.liquibase/build">
+      <fileset dir="module/urn.org.netkernelroc.mod.liquibase/src"/>
     </copy>
 
     <nkmodule destdir="build/modules/"
-              modulefile="module/urn.uk.org.onegch.netkernel.liquibase/build/module.xml">
-      <zipfileset dir="module/urn.uk.org.onegch.netkernel.liquibase/build" prefix=""/>
+              modulefile="module/urn.org.netkernelroc.mod.liquibase/build/module.xml">
+      <zipfileset dir="module/urn.org.netkernelroc.mod.liquibase/build" prefix=""/>
     </nkmodule>
   </target>
 
@@ -113,7 +113,7 @@
 
   <target name="package" depends="build">
     <nkpackage destfile="build/netkernelroc-liquibase-${liquibase.version}.nkp.jar"
-               name="urn.org.onegch.netkernel.package.liquibase"
+               name="urn.org.netkernelroc.package.mod.liquibase"
                description="NetKernelROC / liquibase"
                version="${liquibase.version}">
       <modulesfileset dir="build/modules/" prefix="modules" includes="*.jar"/>
