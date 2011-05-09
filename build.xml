@@ -36,15 +36,15 @@
 
   <taskdef name="nkmodule"
            classpathref="nk4.anttools.path"
-           classname="uk.org.onegch.netkernel.antTools.packager.NetKernelModuleTask"/>
+           classname="org.netkernelroc.antTools.packager.NetKernelModuleTask"/>
   
   <taskdef name="nkpackage"
            classpathref="nk4.anttools.path"
-           classname="uk.org.onegch.netkernel.antTools.packager.NetKernelPackageTask"/>
+           classname="org.netkernelroc.antTools.packager.NetKernelPackageTask"/>
 
   <taskdef name="nkdownload"
            classpathref="nk4.anttools.path"
-           classname="uk.org.onegch.netkernel.antTools.download.DownloadNetKernelAntTask"/>
+           classname="org.netkernelroc.antTools.download.DownloadNetKernelAntTask"/>
 
   <macrodef name="git">
     <attribute name="command" />
