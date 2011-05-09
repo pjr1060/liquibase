@@ -21,6 +21,7 @@
   ~ THE SOFTWARE.
   -->
 <project name="liquibase" default="build">
+  <property file="build.properties"/>
   <property name="nk4-ant-suite" location="../NK4-Ant-Suite-0_3/"/>
   <property name="liquibase.version" value="1.0.0"/>
 
