@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (C) 2010-2011 by Chris Cormack
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in
+  ~ all copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  ~ THE SOFTWARE.
+  -->
+<project name="liquibase" default="build">
+  <property name="nk4-ant-suite" location="../NK4-Ant-Suite-0_3/"/>
+  <property name="liquibase.version" value="1.0.0"/>
+
+  <path id="nk4.anttools.path">
+    <fileset dir="${nk4-ant-suite}">
+      <include name="*.jar"/>
+      <include name="lib/*.jar"/>
+    </fileset>
+  </path>
+
+  <available file="lib/netkernel/modules.conf" property="netkernel.downloaded"/>
+
+  <taskdef name="nkmodule"
+           classpathref="nk4.anttools.path"
+           classname="uk.org.onegch.netkernel.antTools.packager.NetKernelModuleTask"/>
+  
+  <taskdef name="nkpackage"
+           classpathref="nk4.anttools.path"
+           classname="uk.org.onegch.netkernel.antTools.packager.NetKernelPackageTask"/>
+
+  <taskdef name="nkdownload"
+           classpathref="nk4.anttools.path"
+           classname="uk.org.onegch.netkernel.antTools.download.DownloadNetKernelAntTask"/>
+
+  <macrodef name="git">
+    <attribute name="command" />
+    <attribute name="dir" default="" />
+    <element name="args" optional="true" />
+    <sequential>
+        <echo message="git @{command}" />
+        <exec executable="git" dir="@{dir}">
+            <arg value="@{command}" />
+            <args/>
+        </exec>
+    </sequential>
+  </macrodef>
+  
+  <target name="clean">
+    <delete dir="module" includes="**/build/**/*"/>
+    <delete dir="lib/netkernelroc"/>
+    <delete dir="${basedir}">
+      <include name="*.jar"/>
+    </delete>
+  </target>
+
+  <target name="clean.full" depends="clean">
+    <delete dir="lib/netkernel"/>
+    <nkdownload path="lib/netkernel"/>
+  </target>
+
+  <target name="init" unless="netkernel.downloaded">
+    <nkdownload path="lib/netkernel"/>
+  </target>
+  
+  <target name="layer2.init" depends="init">
+    <mkdir dir="lib/netkernelroc"/>
+    <available file="lib/netkernelroc/layer2/.git/config" property="layer2.cloned"/>
+  </target>
+
+  <target name="layer2.clone" depends="layer2.init" unless="layer2.cloned">
+    <git command="clone">
+      <args>
+        <arg value="git://github.com/netkernelroc/layer2.git" />
+        <arg value="lib/netkernelroc/layer2" />
+       </args>
+    </git>
+  </target>
+  
+  <target name="layer2.update" depends="layer2.init" if="layer2.cloned">
+    <git command="pull" dir="lib/netkernelroc/layer2"/>
+    <git command="checkout" dir="lib/netkernelroc/layer2">
+      <args>
+        <arg value="master"/>
+      </args>
+    </git>
+    <git command="reset" dir="lib/netkernelroc/layer2"/>
+  </target>
+
+  <target name="layer2.build" depends="layer2.clone, layer2.update">
+    <!-- copy the downloaded copy of netkernel so layer2 doesn't have to redownload it -->
+    <mkdir dir="lib/netkernelroc/layer2/lib/netkernel" />
+    <copy todir="lib/netkernelroc/layer2/lib/netkernel">
+      <fileset dir="lib/netkernel"/>
+    </copy>
+    <ant dir="lib/netkernelroc/layer2" antfile="build.xml" target="build"/>
+  </target>
+
+  <target name="liquibase.init" depends="init">
+    <mkdir dir="module/urn.uk.org.onegch.netkernel.liquibase/build"/>
+  </target>
+
+  <target name="liquibase.build" depends="liquibase.init,layer2.build">
+    <path id="build.path">
+      <fileset dir="lib">
+        <include name="netkernel/lib/*.jar"/>
+        <include name="netkernel/modules/*.jar"/>
+        <include name="*.jar"/>
+      </fileset>
+      <fileset dir="module/urn.uk.org.onegch.netkernel.liquibase/src/lib/"/>
+      <pathelement path="lib/netkernelroc/layer2/module/urn.uk.org.onegch.netkernel.layer2/build/"/>
+    </path>
+
+    <javac classpathref="build.path"
+           srcdir="module/urn.uk.org.onegch.netkernel.liquibase/src/"
+           includes="**/*.java"
+           destdir="module/urn.uk.org.onegch.netkernel.liquibase/build"
+           debug="true"
+           target="1.5"/>
+
+    <copy todir="module/urn.uk.org.onegch.netkernel.liquibase/build">
+      <fileset dir="module/urn.uk.org.onegch.netkernel.liquibase/src"/>
+    </copy>
+
+    <nkmodule destdir="build/modules/"
+              modulefile="module/urn.uk.org.onegch.netkernel.liquibase/build/module.xml">
+      <zipfileset dir="module/urn.uk.org.onegch.netkernel.liquibase/build" prefix=""/>
+    </nkmodule>
+  </target>
+
+  <target name="build">
+    <antcall target="liquibase.build"/>
+  </target>
+
+  <target name="package" depends="build">
+    <nkpackage destfile="build/netkernelroc-liquibase-${liquibase.version}.nkp.jar"
+               name="urn.org.onegch.netkernel.package.liquibase"
+               description="NetKernelROC / liquibase"
+               version="${liquibase.version}">
+      <modulesfileset dir="build/modules/" prefix="modules" includes="*.jar"/>
+    </nkpackage>
+  </target>
+</project>
