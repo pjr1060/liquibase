@@ -62,6 +62,7 @@
   <target name="clean">
     <delete dir="module" includes="**/build/**/*"/>
     <delete dir="lib/netkernelroc"/>
+    <delete dir="build"/>
     <delete dir="${basedir}">
       <include name="*.jar"/>
     </delete>
