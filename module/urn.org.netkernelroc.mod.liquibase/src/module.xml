@@ -73,4 +73,13 @@
       </grammar>
     </accessor>
   </rootspace>
+  
+  <rootspace uri="urn:org:netkernelroc:mod:liquibase:doc" public="true">
+  	<fileset>
+  		<regex>res:/etc/system/(Docs|Books)\.xml</regex>
+  	</fileset>
+  	<fileset>
+  		<regex>res:/org/netkernelroc/mod/liquibase/doc/.*</regex>
+  	</fileset>
+  </rootspace>
 </module>

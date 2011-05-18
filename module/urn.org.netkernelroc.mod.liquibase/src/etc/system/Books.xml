@@ -1,0 +1,19 @@
+<books>
+  <book>
+    <id>book:netkernelroc:mod-liquibase:book</id>
+    <title>Liquibase Module</title>
+    <desc>Documentation for the Liquibase module</desc>
+    <author/>
+    <publisher/>
+    <date/>
+    <modified/>
+    <icon/>
+    <keywords/>
+    <toc>
+      <item id="doc:netkernelroc:mod-liquibase:title">
+        <separator/>
+        <item id="doc:netkernelroc:mod-liquibase:license"/>
+      </item>
+    </toc>
+  </book>
+</books>

@@ -42,7 +42,7 @@ public abstract class AbstractLiquibaseAccessor extends StandardAccessorImpl {
     ClassLoader cl= new RequestScopeClassLoader(aContext.getKernelContext().getThisKernelRequest().getRequestScope());
     ResourceAccessor ra= new NetKernelResourceAccessor(aContext, cl);
     
-    IHDSNode configNode= aContext.source("res:/etc/system/LiquibaseConfig.xml", IHDSNode.class);
+    IHDSNode configNode= aContext.source("res:/etc/LiquibaseConfig.xml", IHDSNode.class);
     
     Database database = createDatabaseObject(cl,
                                              (String)configNode.getFirstValue("//jdbcDriver"),

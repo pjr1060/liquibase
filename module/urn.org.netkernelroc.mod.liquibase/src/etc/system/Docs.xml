@@ -1,0 +1,17 @@
+<docs>
+
+	<doc>
+		<id>doc:netkernelroc:mod-liquibase:title</id>
+		<title>Liquibase Guide</title>
+		<desc>A guide to Liquibase services</desc>
+		<uri>res:/org/netkernelroc/mod/liquibase/doc/title.txt</uri>
+	</doc>
+
+	<doc>
+		<id>doc:netkernelroc:mod-liquibase:license</id>
+		<title>License</title>
+		<desc>License information for NetKernelROC.org Liquibase module</desc>
+    	<uri>res:/org/netkernelroc/mod/liquibase/doc/license.txt</uri>
+	</doc>
+
+</docs>
