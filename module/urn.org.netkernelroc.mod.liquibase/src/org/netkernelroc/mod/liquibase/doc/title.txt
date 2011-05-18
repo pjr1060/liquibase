@@ -1,4 +1,20 @@
 {draft}
 =Liquibase=
 
+This library integrates the [http://www.liquibase.org/|Liquibase] database refactoring tool
+and makes it available to ROC processes through a set of simple accessors.
+
+==NetKernelROC.org==
+
+This NetKernel module is the work of the [http://www.netkernelroc.org|NetKernelROC.org] community.
+
+==Acknowledgements==
+
+Our grateful thanks to all those that have contributed to the [http://www.liquibase.org/|Liquibase] project.
+
+=Trademarks=
+
+1060, NetKernel, Resource Oriented Computing and ROC are registered trademarks of [http://www.1060research.com/|1060 Research Limited]
+their use by the [http://www.netkernelroc.org|NetKernelROC.org] community is granted under license.
+
 {/draft}

@@ -11,6 +11,9 @@
     <keywords/>
     <toc>
       <item id="doc:netkernelroc:mod-liquibase:title">
+      	<item id="doc:netkernelroc:mod-liquibase:title:active:liquibase-update"/>
+      	<item id="doc:netkernelroc:mod-liquibase:title:active:liquibase-update-available"/>
+      	<item id="doc:netkernelroc:mod-liquibase:title:active:liquibase-clear-checksums"/>
         <separator/>
         <item id="doc:netkernelroc:mod-liquibase:license"/>
       </item>

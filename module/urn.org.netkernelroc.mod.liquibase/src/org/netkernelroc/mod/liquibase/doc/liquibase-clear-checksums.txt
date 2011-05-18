@@ -1,0 +1,3 @@
+{draft}
+{endpoint}liquibase.clear-checksums{/endpoint}
+{/draft}

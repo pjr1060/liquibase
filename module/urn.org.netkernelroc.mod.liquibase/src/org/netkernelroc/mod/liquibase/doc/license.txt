@@ -231,9 +231,5 @@ Use of the Liquibase library is made under the terms of the Apache Public Licens
    See the License for the specific language governing permissions and
    limitations under the License.
 
-=Trademarks=
-
-1060, NetKernel, Resource Oriented Computing and ROC are registered trademarks of [http://www.1060research.com/|1060 Research Limited]
-their use by the [http://www.netkernelroc.org|NetKernelROC.org] community is granted under license.
 
 {/draft} 

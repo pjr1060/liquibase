@@ -1,0 +1,3 @@
+{draft}
+{endpoint}liquibase.update{/endpoint}
+{/draft}

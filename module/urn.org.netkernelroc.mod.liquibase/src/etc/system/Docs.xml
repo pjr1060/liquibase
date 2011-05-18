@@ -6,7 +6,26 @@
 		<desc>A guide to Liquibase services</desc>
 		<uri>res:/org/netkernelroc/mod/liquibase/doc/title.txt</uri>
 	</doc>
-
+	
+	<doc>
+		<id>doc:netkernelroc:mod-liquibase:title:active:liquibase-update</id>
+		<title>active:liquibase-update</title>
+		<desc>The active:liquibase-update accessor</desc>
+		<uri>res:/org/netkernelroc/mod/liquibase/doc/liquibase-update.txt</uri>
+	</doc>
+	<doc>
+		<id>doc:netkernelroc:mod-liquibase:title:active:liquibase-update-available</id>
+		<title>active:liquibase-update-available</title>
+		<desc>The active:liquibase-update-available accessor</desc>
+		<uri>res:/org/netkernelroc/mod/liquibase/doc/liquibase-update-available.txt</uri>
+	</doc>
+	<doc>
+		<id>doc:netkernelroc:mod-liquibase:title:active:liquibase-clear-checksums</id>
+		<title>active:liquibase-clear-checksums</title>
+		<desc>The active:liquibase-clear-checksums accessor</desc>
+		<uri>res:/org/netkernelroc/mod/liquibase/doc/liquibase-clear-checksums.txt</uri>
+	</doc>
+	
 	<doc>
 		<id>doc:netkernelroc:mod-liquibase:license</id>
 		<title>License</title>
